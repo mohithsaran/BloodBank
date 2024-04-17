@@ -75,29 +75,21 @@ const loginController = async (req, res) => {
   };
 
 const currentUser=async(req,res)=>{
-    try{
-        const user=await userModel.findById(req.body.userId)
-        if(!user){
-            return res.status(404).send({
-                success:false,
-                message:'User not found'
-            })
-        }
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId });
         return res.status(200).send({
-            success:true,
-            message:'User found successfully',
-            user
-        })
-    }
-    catch(err){
-        console.log(err)
+          success: true,
+          message: "User Fetched Successfully",
+          user,
+        });
+      } catch (error) {
+        console.log(error);
         return res.status(500).send({
-            success:false,
-            message:'Error in getting current user',
-            err
-        })
-
-    }
-}
+          success: false,
+          message: "unable to get current user",
+          error,
+        });
+      }
+    };
 
 module.exports={registerController,loginController,currentUser}
