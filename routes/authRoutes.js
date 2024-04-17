@@ -6,8 +6,6 @@ const router=express.Router()
 //routes
 router.post('/register',registerController)
 router.post('/login',loginController)
-//get current user
-router.get('/currentuser',authMiddleware,currentUser)
 
 
 
