@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 
 
 //portnumber-8060
-const port=process.env.PORT||8060;
+const port=8060;
 
 //home
 app.get('/',(req,res)=>{
@@ -31,6 +31,7 @@ app.get('/',(req,res)=>{
 
 //stitching the route
 app.use('/api/v1/auth',require('./routes/authRoutes'))
+app.use('/api/v1/inventory',require('./routes/inventoryRoutes'))
 
 
 //listen
