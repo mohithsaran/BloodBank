@@ -1,8 +1,9 @@
 const inventoryModel = require("../models/inventoryModel");
+const userModel = require("../models/userModel");
 
 const createInventoryController=async(req,res)=>{
     try{
-        const {email}=req.body
+        const {email,inventoryType}=req.body
         const user=await userModel.findOne({email})
 
         if(!user){
@@ -36,4 +37,24 @@ const createInventoryController=async(req,res)=>{
 
 }
 
-module.exports={createInventoryController}
+const getInventoryController=async(req,res)=>{
+    try{
+        const inventory=await inventoryModel.find({organisation:req.body.userId})
+        return res.status(200).send({
+            success:true,
+            message:"Inventory fetched successfully",
+            inventory
+        })
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({
+            success:false,
+            message:"Error in getting inventory",
+            err
+        }
+        )
+    }
+}
+
+module.exports={createInventoryController,getInventoryController}

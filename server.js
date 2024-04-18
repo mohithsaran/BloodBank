@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 
 
 //portnumber-8060
-const port=8060;
+const port=process.env.PORT||8060;
 
 //home
 app.get('/',(req,res)=>{
